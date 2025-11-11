@@ -144,8 +144,7 @@ if __name__ == "__main__":
     try:
         while True:
             server_ip = s["modbus"]["slave_ip"]
-            
-			values1 = read_hr(
+            values1 = read_hr(
                 holding_register=201,
                 size=20,
                 server_ip=server_ip,
@@ -153,8 +152,8 @@ if __name__ == "__main__":
                 word_order="reverse",
             )
             logging.info(f"values output: {values1}")
- 
-			values1 = [round(v, 4) for v in values1]
+            
+            values1 = [round(v, 4) for v in values1]
             logging.info(f"rounded values: {values1}")
 			
 			# Read register 226 (1 float value for Battery)
@@ -177,7 +176,7 @@ if __name__ == "__main__":
             )
             logging.info(f"values output: {values3}")
 			
-			values4 = read_hr(
+            values4 = read_hr(
                 holding_register=127,
                 size=1,
                 server_ip=server_ip,
@@ -204,77 +203,77 @@ if __name__ == "__main__":
                         "degC",
                         datetime.datetime.utcnow(),
                     )
-					client.send(
+                    client.send(
                         "datalogger",
                         "pH(206)",
                         values[2],
                         "ph",
                         datetime.datetime.utcnow(),
                     )
-					client.send(
+                    client.send(
                         "datalogger",
                         "Temp_pH(208)",
                         values[3],
                         "degC",
                         datetime.datetime.utcnow(),
                     )
-					client.send(
+                    client.send(
                         "datalogger",
                         "Conductivity(210)",
                         values[4],
                         "mS/cm",
                         datetime.datetime.utcnow(),
                     )
-					client.send(
+                    client.send(
                         "datalogger",
                         "TDS(212)",
                         values[5],
                         "mg/L",
                         datetime.datetime.utcnow(),
                     )
-					client.send(
+                    client.send(
                         "datalogger",
                         "Dis_Oxy_RAW(214)",
                         values[6],
                         "mg/L",
                         datetime.datetime.utcnow(),
                     )
-					client.send(
+                    client.send(
                         "datalogger",
                         "TSS_RAW(216)",
                         values[7],
                         "mg/L",
                         datetime.datetime.utcnow(),
                     )
-					client.send(
+                    client.send(
                         "datalogger",
                         "Velocity_RAW(218)",
                         values[8],
                         "m/s",
                         datetime.datetime.utcnow(),
                     )
-					client.send(
+                    client.send(
                         "datalogger",
                         "Level_RAW(220)",
                         values[9],
                         "m",
                         datetime.datetime.utcnow(),
                     )
-					client.send(
+                    client.send(
                         "datalogger",
                         "Bat(226)",
                         values[10],
                         "V",
                         datetime.datetime.utcnow(),
                     )
-					client.send(
+                    client.send(
                         "datalogger",
                         "FloatSwitchState(124)",
                         values[11],
                         "",
                         datetime.datetime.utcnow(),
                     )
-					client.send(
+                    client.send(
                         "datalogger",
                         "DoorSwitchState(128)",
                         values[12],
@@ -304,86 +303,84 @@ if __name__ == "__main__":
                         "degC",
                         datetime.datetime.utcnow(),
                     )
-					client.send(
+                    client.send(
                         "datalogger",
                         "pH(206)",
                         values[2],
                         "ph",
                         datetime.datetime.utcnow(),
                     )
-					client.send(
+                    client.send(
                         "datalogger",
                         "Temp_pH(208)",
                         values[3],
                         "degC",
                         datetime.datetime.utcnow(),
                     )
-					client.send(
+                    client.send(
                         "datalogger",
                         "Conductivity(210)",
                         values[4],
                         "mS/cm",
                         datetime.datetime.utcnow(),
                     )
-					client.send(
+                    client.send(
                         "datalogger",
                         "TDS(212)",
                         values[5],
                         "mg/L",
                         datetime.datetime.utcnow(),
                     )
-					client.send(
+                    client.send(
                         "datalogger",
                         "Dis_Oxy(214)",
                         values[6],
                         "mg/L",
                         datetime.datetime.utcnow(),
                     )
-					client.send(
+                    client.send(
                         "datalogger",
                         "TSS(216)",
                         values[7],
                         "mg/L",
                         datetime.datetime.utcnow(),
                     )
-					client.send(
+                    client.send(
                         "datalogger",
                         "Velocity(218)",
                         values[8],
                         "m/s",
                         datetime.datetime.utcnow(),
                     )
-					client.send(
+                    client.send(
                         "datalogger",
                         "Level(220)",
                         values[9],
                         "m",
                         datetime.datetime.utcnow(),
                     )
-					client.send(
+                    client.send(
                         "datalogger",
                         "Bat(226)",
                         values[10],
                         "V",
                         datetime.datetime.utcnow(),
                     )
-					client.send(
+                    client.send(
                         "datalogger",
                         "FloatSwitchState(124)",
                         values[11],
                         "",
                         datetime.datetime.utcnow(),
                     )
-					client.send(
+                    client.send(
                         "datalogger",
                         "DoorSwitchState(128)",
                         values[12],
                         "uS/cm",
                         datetime.datetime.utcnow(),
                     )
-					
-					
-                        last_read_time = time.time()
+                    last_read_time = time.time()
                 if values[11] != last_read[11]:
                     logging.info("Float Switch changed, push")
                     client.send(
@@ -394,8 +391,8 @@ if __name__ == "__main__":
                         datetime.datetime.utcnow(),
                     )
                     last_read = values
-				
-				if values[12] != last_read[12]:
+                
+                if values[12] != last_read[12]:
                     logging.info("Door Switch changed, push")
                     client.send(
                         "datalogger",
