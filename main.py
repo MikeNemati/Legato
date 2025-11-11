@@ -147,7 +147,7 @@ if __name__ == "__main__":
             
 			values1 = read_hr(
                 holding_register=201,
-                size=22,
+                size=20,
                 server_ip=server_ip,
                 format="32bit_float",
                 word_order="reverse",
@@ -175,7 +175,7 @@ if __name__ == "__main__":
                 server_ip=server_ip,
                 format="16bit_integer",
             )
-            logging.info(f"values output: {values2}")
+            logging.info(f"values output: {values3}")
 			
 			values4 = read_hr(
                 holding_register=127,
@@ -183,7 +183,7 @@ if __name__ == "__main__":
                 server_ip=server_ip,
                 format="16bit_integer",
             )
-            logging.info(f"values output: {values2}")
+            logging.info(f"values output: {values4}")
 			
             values = values1 + values2 + values3 + values4
 			
