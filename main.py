@@ -7,7 +7,7 @@ import ssl
 import pathlib
 
 import yaml
-#MN To interact with Cumulocity IoT devices. Versioan 1.01
+#MN To interact with Cumulocity IoT devices. Versioan 1.02
 from c8y.c8y_device import c8yDevice
 #MN To read "holding registers" in a Modbus device.
 from modbus.modbus_client import read_hr
@@ -408,4 +408,5 @@ if __name__ == "__main__":
         logging.info("Received keyboard interrupt, quitting ...")
         client.on = False
         exit(0)
+
 
