@@ -7,7 +7,7 @@ import ssl
 import pathlib
 
 import yaml
-#MN To interact with Cumulocity IoT devices.
+#MN To interact with Cumulocity IoT devices. Versioan 1.01
 from c8y.c8y_device import c8yDevice
 #MN To read "holding registers" in a Modbus device.
 from modbus.modbus_client import read_hr
@@ -233,28 +233,28 @@ if __name__ == "__main__":
                     )
                     client.send(
                         "datalogger",
-                        "Dis_Oxy_RAW(214)",
+                        "Dis_Oxy(214)",
                         values[6],
                         "mg/L",
                         datetime.datetime.utcnow(),
                     )
                     client.send(
                         "datalogger",
-                        "TSS_RAW(216)",
+                        "TSS(216)",
                         values[7],
                         "mg/L",
                         datetime.datetime.utcnow(),
                     )
                     client.send(
                         "datalogger",
-                        "Velocity_RAW(218)",
+                        "Velocity(218)",
                         values[8],
                         "m/s",
                         datetime.datetime.utcnow(),
                     )
                     client.send(
                         "datalogger",
-                        "Level_RAW(220)",
+                        "Level(220)",
                         values[9],
                         "m",
                         datetime.datetime.utcnow(),
@@ -377,7 +377,7 @@ if __name__ == "__main__":
                         "datalogger",
                         "DoorSwitchState(128)",
                         values[12],
-                        "uS/cm",
+                        "",
                         datetime.datetime.utcnow(),
                     )
                     last_read_time = time.time()
