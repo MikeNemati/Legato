@@ -7,7 +7,7 @@ import ssl
 import pathlib
 
 import yaml
-#MN To interact with Cumulocity IoT devices. Versioan 1.02
+#MN To interact with Cumulocity IoT devices. Versioan 1.03
 from c8y.c8y_device import c8yDevice
 #MN To read "holding registers" in a Modbus device.
 from modbus.modbus_client import read_hr
@@ -289,98 +289,98 @@ if __name__ == "__main__":
                         logging.info(
                             f"{SEND_INTERVAL} mins reached, push 13 measurements"
                         )
-                    client.send(
-                        "datalogger",
-                        "Turbidity(202)",
-                        values[0],
-                        "NTU",
-                        datetime.datetime.utcnow(),
-                    )
-                    client.send(
-                        "datalogger",
-                        "Temp_Turb(204)",
-                        values[1],
-                        "degC",
-                        datetime.datetime.utcnow(),
-                    )
-                    client.send(
-                        "datalogger",
-                        "pH(206)",
-                        values[2],
-                        "ph",
-                        datetime.datetime.utcnow(),
-                    )
-                    client.send(
-                        "datalogger",
-                        "Temp_pH(208)",
-                        values[3],
-                        "degC",
-                        datetime.datetime.utcnow(),
-                    )
-                    client.send(
-                        "datalogger",
-                        "Conductivity(210)",
-                        values[4],
-                        "mS/cm",
-                        datetime.datetime.utcnow(),
-                    )
-                    client.send(
-                        "datalogger",
-                        "TDS(212)",
-                        values[5],
-                        "mg/L",
-                        datetime.datetime.utcnow(),
-                    )
-                    client.send(
-                        "datalogger",
-                        "Dis_Oxy(214)",
-                        values[6],
-                        "mg/L",
-                        datetime.datetime.utcnow(),
-                    )
-                    client.send(
-                        "datalogger",
-                        "TSS(216)",
-                        values[7],
-                        "mg/L",
-                        datetime.datetime.utcnow(),
-                    )
-                    client.send(
-                        "datalogger",
-                        "Velocity(218)",
-                        values[8],
-                        "m/s",
-                        datetime.datetime.utcnow(),
-                    )
-                    client.send(
-                        "datalogger",
-                        "Level(220)",
-                        values[9],
-                        "m",
-                        datetime.datetime.utcnow(),
-                    )
-                    client.send(
-                        "datalogger",
-                        "Bat(226)",
-                        values[10],
-                        "V",
-                        datetime.datetime.utcnow(),
-                    )
-                    client.send(
-                        "datalogger",
-                        "FloatSwitchState(124)",
-                        values[11],
-                        "",
-                        datetime.datetime.utcnow(),
-                    )
-                    client.send(
-                        "datalogger",
-                        "DoorSwitchState(128)",
-                        values[12],
-                        "",
-                        datetime.datetime.utcnow(),
-                    )
-                    last_read_time = time.time()
+                        client.send(
+                            "datalogger",
+                            "Turbidity(202)",
+                            values[0],
+                            "NTU",
+                            datetime.datetime.utcnow(),
+                        )
+                        client.send(
+                            "datalogger",
+                            "Temp_Turb(204)",
+                            values[1],
+                            "degC",
+                            datetime.datetime.utcnow(),
+                        )
+                        client.send(
+                            "datalogger",
+                            "pH(206)",
+                            values[2],
+                            "ph",
+                            datetime.datetime.utcnow(),
+                        )
+                        client.send(
+                            "datalogger",
+                            "Temp_pH(208)",
+                            values[3],
+                            "degC",
+                            datetime.datetime.utcnow(),
+                        )
+                        client.send(
+                            "datalogger",
+                            "Conductivity(210)",
+                            values[4],
+                            "mS/cm",
+                            datetime.datetime.utcnow(),
+                        )
+                        client.send(
+                            "datalogger",
+                            "TDS(212)",
+                            values[5],
+                            "mg/L",
+                            datetime.datetime.utcnow(),
+                        )
+                        client.send(
+                            "datalogger",
+                            "Dis_Oxy(214)",
+                            values[6],
+                            "mg/L",
+                            datetime.datetime.utcnow(),
+                        )
+                        client.send(
+                            "datalogger",
+                            "TSS(216)",
+                            values[7],
+                            "mg/L",
+                            datetime.datetime.utcnow(),
+                        )
+                        client.send(
+                            "datalogger",
+                            "Velocity(218)",
+                            values[8],
+                            "m/s",
+                            datetime.datetime.utcnow(),
+                        )
+                        client.send(
+                            "datalogger",
+                            "Level(220)",
+                            values[9],
+                            "m",
+                            datetime.datetime.utcnow(),
+                        )
+                        client.send(
+                            "datalogger",
+                            "Bat(226)",
+                            values[10],
+                            "V",
+                            datetime.datetime.utcnow(),
+                        )
+                        client.send(
+                            "datalogger",
+                            "FloatSwitchState(124)",
+                            values[11],
+                            "",
+                            datetime.datetime.utcnow(),
+                        )
+                        client.send(
+                            "datalogger",
+                            "DoorSwitchState(128)",
+                            values[12],
+                            "",
+                            datetime.datetime.utcnow(),
+                        )
+                        last_read_time = time.time()
                 if values[11] != last_read[11]:
                     logging.info("Float Switch changed, push")
                     client.send(
@@ -408,5 +408,3 @@ if __name__ == "__main__":
         logging.info("Received keyboard interrupt, quitting ...")
         client.on = False
         exit(0)
-
-
