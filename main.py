@@ -139,7 +139,7 @@ if __name__ == "__main__":
     last_read = None
     last_read_time = None
 
-    SEND_INTERVAL = 30
+    SEND_INTERVAL = 6
 
     try:
         while True:
@@ -408,3 +408,4 @@ if __name__ == "__main__":
         logging.info("Received keyboard interrupt, quitting ...")
         client.on = False
         exit(0)
+
