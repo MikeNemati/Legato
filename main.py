@@ -43,7 +43,7 @@ def aws_connect(cfg, certs_path):
         p = pathlib.Path(f)
         assert p.is_file(), f"Missing TLS file: {p}"
 
-    c = mqtt.Client(client_id=client_id, clean_session=True)
+    c = mqtt.Client(client_id=str(client_id), clean_session=True)
     c.enable_logger(logging.getLogger("aws_mqtt"))
 
     c.tls_set(
