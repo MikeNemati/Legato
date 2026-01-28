@@ -9,7 +9,7 @@ import pathlib
 
 import yaml
 import paho.mqtt.client as mqtt
-#MN To interact with AWS IoT devices. Versioan 2.01
+#MN To interact with AWS IoT devices. Versioan 2.02 sending 9999 when no sensors connected
 # MN To read "holding registers" in a Modbus device.
 from modbus.modbus_client import read_hr
 
@@ -215,7 +215,21 @@ if __name__ == "__main__":
                         last_read = values
 
                 else:
-                    logging.warning(f"Not sending sensor data (expected 13 values, got {len(values)})")
+                    logging.warning("No sensors detected, sending dummy values (9999)")
+                    dummy = [9999] * 13
+                    publish_measurement(aws_client, aws_topic, "Turbidity(202)", dummy[0], "NTU")
+                    publish_measurement(aws_client, aws_topic, "Temp_Turb(204)", dummy[1], "degC")
+                    publish_measurement(aws_client, aws_topic, "pH(206)", dummy[2], "ph")
+                    publish_measurement(aws_client, aws_topic, "Temp_pH(208)", dummy[3], "degC")
+                    publish_measurement(aws_client, aws_topic, "Conductivity(210)", dummy[4], "mS/cm")
+                    publish_measurement(aws_client, aws_topic, "TDS(212)", dummy[5], "mg/L")
+                    publish_measurement(aws_client, aws_topic, "Dis_Oxy(214)", dummy[6], "mg/L")
+                    publish_measurement(aws_client, aws_topic, "TSS(216)", dummy[7], "mg/L")
+                    publish_measurement(aws_client, aws_topic, "Velocity(218)", dummy[8], "m/s")
+                    publish_measurement(aws_client, aws_topic, "Level(220)", dummy[9], "m")
+                    publish_measurement(aws_client, aws_topic, "Bat(226)", dummy[10], "V")
+                    publish_measurement(aws_client, aws_topic, "FloatSwitchState(124)", dummy[11], "")
+                    publish_measurement(aws_client, aws_topic, "DoorSwitchState(128)", dummy[12], "")
 
             except Exception as e:
                 logging.warning(f"Modbus skipped (no sensors / unreachable): {e}")
