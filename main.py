@@ -213,7 +213,7 @@ if __name__ == "__main__":
                 else:
                     if last_read_time is None or (time.time() - last_read_time > 60 * SEND_INTERVAL):
                         logging.warning("No sensors detected, sending dummy values (9999)")
-                        dummy = [5555] * 13
+                        dummy = [9999] * 13
                         publish_measurement(aws_client, aws_topic, device_id, "Turbidity(202)", dummy[0], "NTU")
                         publish_measurement(aws_client, aws_topic, device_id, "Temp_Turb(204)", dummy[1], "degC")
                         publish_measurement(aws_client, aws_topic, device_id, "pH(206)", dummy[2], "ph")
@@ -242,3 +242,4 @@ if __name__ == "__main__":
         except Exception:
             pass
         exit(0)
+
