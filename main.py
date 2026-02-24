@@ -10,7 +10,7 @@ import pathlib
 import yaml
 import paho.mqtt.client as mqtt
 
-#MN To interact with AWS IoT devices. Versioan 2.03 with Device ID sending dummy data
+#MN To interact with AWS IoT devices. Versioan 2.05 with Device ID sending Real data Only
 # MN To read "holding registers" in a Modbus device.
 from modbus.modbus_client import read_hr
 
@@ -120,9 +120,9 @@ if __name__ == "__main__":
                     aws_client,
                     aws_topic,
                     {
-                        "type": "hello",
+                        "type": "Online",
                         "deviceId": str(device_id),  # <-- added
-                        "message": "Hello World from FX30",
+                        "message": "On",
                         "timestamp": datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
                     },
                 )
@@ -210,24 +210,24 @@ if __name__ == "__main__":
                         publish_measurement(aws_client, aws_topic, device_id, "DoorSwitchState(128)", values[12], "")
                         last_read = values
 
-                else:
-                    if last_read_time is None or (time.time() - last_read_time > 60 * SEND_INTERVAL):
-                        logging.warning("No sensors detected, sending dummy values (9999)")
-                        dummy = [9999] * 13
-                        publish_measurement(aws_client, aws_topic, device_id, "Turbidity(202)", dummy[0], "NTU")
-                        publish_measurement(aws_client, aws_topic, device_id, "Temp_Turb(204)", dummy[1], "degC")
-                        publish_measurement(aws_client, aws_topic, device_id, "pH(206)", dummy[2], "ph")
-                        publish_measurement(aws_client, aws_topic, device_id, "Temp_pH(208)", dummy[3], "degC")
-                        publish_measurement(aws_client, aws_topic, device_id, "Conductivity(210)", dummy[4], "mS/cm")
-                        publish_measurement(aws_client, aws_topic, device_id, "TDS(212)", dummy[5], "mg/L")
-                        publish_measurement(aws_client, aws_topic, device_id, "Dis_Oxy(214)", dummy[6], "mg/L")
-                        publish_measurement(aws_client, aws_topic, device_id, "TSS(216)", dummy[7], "mg/L")
-                        publish_measurement(aws_client, aws_topic, device_id, "Velocity(218)", dummy[8], "m/s")
-                        publish_measurement(aws_client, aws_topic, device_id, "Level(220)", dummy[9], "m")
-                        publish_measurement(aws_client, aws_topic, device_id, "Bat(226)", dummy[10], "V")
-                        publish_measurement(aws_client, aws_topic, device_id, "FloatSwitchState(124)", dummy[11], "")
-                        publish_measurement(aws_client, aws_topic, device_id, "DoorSwitchState(128)", dummy[12], "")
-                        last_read_time = time.time()
+                #else:
+                 #   if last_read_time is None or (time.time() - last_read_time > 60 * SEND_INTERVAL):
+                  #      logging.warning("No sensors detected, sending dummy values (9999)")
+                   #     dummy = [9999] * 13
+                    #    publish_measurement(aws_client, aws_topic, device_id, "Turbidity(202)", dummy[0], "NTU")
+                     #   publish_measurement(aws_client, aws_topic, device_id, "Temp_Turb(204)", dummy[1], "degC")
+                      #  publish_measurement(aws_client, aws_topic, device_id, "pH(206)", dummy[2], "ph")
+                       # publish_measurement(aws_client, aws_topic, device_id, "Temp_pH(208)", dummy[3], "degC")
+                        #publish_measurement(aws_client, aws_topic, device_id, "Conductivity(210)", dummy[4], "mS/cm")
+                #        publish_measurement(aws_client, aws_topic, device_id, "TDS(212)", dummy[5], "mg/L")
+                 #       publish_measurement(aws_client, aws_topic, device_id, "Dis_Oxy(214)", dummy[6], "mg/L")
+                  #      publish_measurement(aws_client, aws_topic, device_id, "TSS(216)", dummy[7], "mg/L")
+                   #     publish_measurement(aws_client, aws_topic, device_id, "Velocity(218)", dummy[8], "m/s")
+                    #    publish_measurement(aws_client, aws_topic, device_id, "Level(220)", dummy[9], "m")
+                     #   publish_measurement(aws_client, aws_topic, device_id, "Bat(226)", dummy[10], "V")
+                      #  publish_measurement(aws_client, aws_topic, device_id, "FloatSwitchState(124)", dummy[11], "")
+                       # publish_measurement(aws_client, aws_topic, device_id, "DoorSwitchState(128)", dummy[12], "")
+                        #last_read_time = time.time()
 
             except Exception as e:
                 logging.warning(f"Modbus skipped (no sensors / unreachable): {e}")
